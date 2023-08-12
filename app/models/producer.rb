@@ -10,4 +10,5 @@
 #  updated_at :datetime         not null
 #
 class Producer < ApplicationRecord
+  has_many :coffees
 end

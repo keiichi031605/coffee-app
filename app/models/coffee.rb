@@ -13,4 +13,5 @@
 #  producer_id :bigint
 #
 class Coffee < ApplicationRecord
+  belongs_to :producer
 end
