@@ -12,4 +12,8 @@
 ### gem ###
 - `rack-cors`
 - `annotate` (run `bundle exec annotate --models`)
-# coffee-app
+## coffee-app
+
+<img width="1425" alt="Screenshot 2023-08-12 at 9 49 22 pm" src="https://github.com/keiichi031605/coffee-app/assets/58890575/27c3a846-964e-4cc8-98be-900f3d12cba2">
+
+
