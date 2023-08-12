@@ -1,25 +1,10 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### setup ###
+1. create Rails 7.0 API app with `rails new coffee-app --api --skip-test -T --database=postgresql -j=esbuild`
+2. create React.js app with `npx create-react-app react-web-app`
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### gem ###
+- `rack-cors`
+- `annotate` (run `bundle exec annotate --models`)
 # coffee-app
