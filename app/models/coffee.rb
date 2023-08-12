@@ -14,4 +14,5 @@
 #
 class Coffee < ApplicationRecord
   belongs_to :producer
+  has_many :roastings
 end
