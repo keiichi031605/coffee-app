@@ -1,0 +1,18 @@
+.container {
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.home-text {
+  max-width: 780px;
+  margin-bottom: 40px !important;
+}
+.home-image {
+  max-width: 860px;
+}
+.get-started-button {
+  width: 200px;
+  margin-bottom: 40px !important;
+}
