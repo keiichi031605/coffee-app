@@ -1,0 +1,22 @@
+/* .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+} */
+.app-bar {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 4vw;
+}
+.logo {
+  margin: 12px;
+  max-width: 140px;
+}
+.login-button {
+  width: 100px;
+  margin-right: 20px !important;
+}
+.sign-up-button {
+  width: 100px;
+}
