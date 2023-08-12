@@ -7,6 +7,8 @@
 
 3. create user model with devise. Referred to https://sdrmike.medium.com/rails-7-api-only-app-with-devise-and-jwt-for-authentication-1397211fb97c
 
+4. install react-router-dom and axios with `npm install axios react-router-dom`
+
 ### gem ###
 - `rack-cors`
 - `annotate` (run `bundle exec annotate --models`)
