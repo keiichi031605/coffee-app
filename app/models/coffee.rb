@@ -10,6 +10,7 @@
 #  roasted_for :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  producer_id :bigint
 #
 class Coffee < ApplicationRecord
 end
