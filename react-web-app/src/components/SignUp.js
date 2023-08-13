@@ -1,7 +1,35 @@
 import React from 'react';
 import { AppBar, Box, TextField, Button, Container, Typography, Link } from '@mui/material';
+import api from '../api/api.js';
 
 export default function SignUp() {
+    // HTTP POST request to rails API for sign up
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (e.target.password.value !== e.target.passwordConfirmation.value) {
+      console.error("Passwords do not match.");
+      return;
+    }
+    try {
+      const response = await api.post('/signup', {
+        user: {
+          email: e.target.email.value,
+          password: e.target.password.value,
+          password_confirmation: e.target.passwordConfirmation.value,
+        },
+      });
+
+      if (response.data.status.code === 200) {
+        console.log(response.data.status.message);
+        // Store the user data or JWT token as needed.
+        // Navigate or do some action after successful registration.
+      }
+    } catch (error) {
+      console.error("Error signing up:", error.response.data.status.message);
+    }
+  };
+
   return (
     <React.Fragment>
       <Container component="main" maxWidth="xs">
@@ -29,6 +57,7 @@ export default function SignUp() {
           </AppBar>
           <Box
             component="form"
+            onSubmit={handleSubmit}
             sx={{
               width: '100%',
               mt: 1,
@@ -65,11 +94,10 @@ export default function SignUp() {
               margin="normal"
               required
               fullWidth
-              name="confirmPassword"
+              name="passwordConfirmation"
               label="Confirm Password"
               type="password"
-              id="confirmPassword"
-              autoComplete="new-password"
+              id="passwordConfirmation"  
             />
             <Button
               type="submit"

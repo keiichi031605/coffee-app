@@ -1,7 +1,28 @@
 import React from 'react';
 import { AppBar, Box, TextField, Button, Container, Typography, Link } from '@mui/material';
+import api from '../api/api.js';
 
 export default function Login() {
+  // HTTP POST request to rails API for login
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await api.post('/login', {
+        user: {
+          email: e.target.email.value,
+          password: e.target.password.value,
+        },
+      });
+
+      if (response.data.status.code === 200) {
+        console.log(response.data.status.message);
+        // Store the user data or JWT token as needed.
+        // Navigate or do some action after successful login.
+      }
+    } catch (error) {
+      console.error("Error logging in:", error.response.data.status.message);
+    }
+  };
 
   return (
     <React.Fragment>
@@ -30,6 +51,7 @@ export default function Login() {
           </AppBar>
           <Box 
             component="form"
+            onSubmit={handleSubmit}    
             sx={{
               width: '100%',
               mt: 1,
