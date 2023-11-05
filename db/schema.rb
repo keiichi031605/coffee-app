@@ -60,8 +60,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_12_032416) do
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_producers_on_user_id"
   end
 
   create_table "roastings", force: :cascade do |t|

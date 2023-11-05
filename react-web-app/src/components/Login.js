@@ -1,26 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AppBar, Box, TextField, Button, Container, Typography, Link } from '@mui/material';
 import api from '../api/api.js';
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
   // HTTP POST request to rails API for login
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
     try {
       const response = await api.post('/login', {
         user: {
-          email: e.target.email.value,
-          password: e.target.password.value,
-        },
+          email: email,
+          password: password
+        }
       });
 
-      if (response.data.status.code === 200) {
-        console.log(response.data.status.message);
+      if (response?.data?.status?.code === 200) {
+        console.log(response.data.status)
         // Store the user data or JWT token as needed.
         // Navigate or do some action after successful login.
+        // const response = await api.get('/', {
+        //   user: {
+        //     email: e.target.email.value,
+        //     password: e.target.password.value,
+        //   },
+        // });
       }
     } catch (error) {
-      console.error("Error logging in:", error.response.data.status.message);
+      if (error.response && error.response.status === 401) {
+        setError('Invalid email or password. Please try again.');
+      } else {
+        setError('Something went wrong. Please try again later.');
+      }
+      console.error("Error logging in:", error.response || error);    
     }
   };
 
@@ -71,6 +87,8 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
               variant="outlined"
@@ -82,7 +100,14 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}   
             />
+            {error && (
+              <Typography color="error" align="center">
+                {error}
+              </Typography>
+            )}
             <Button
               type="submit"
               fullWidth
