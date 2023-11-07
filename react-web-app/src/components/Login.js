@@ -20,15 +20,10 @@ export default function Login() {
       });
 
       if (response?.data?.status?.code === 200) {
-        console.log(response.data.status)
+        console.log(response.data.status.message)
         // Store the user data or JWT token as needed.
         // Navigate or do some action after successful login.
-        // const response = await api.get('/', {
-        //   user: {
-        //     email: e.target.email.value,
-        //     password: e.target.password.value,
-        //   },
-        // });
+        await api.get('/api/v1/coffees');
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
