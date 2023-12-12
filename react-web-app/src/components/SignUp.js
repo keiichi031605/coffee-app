@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from './Header.js';
 import { AppBar, Box, TextField, Button, Container, Typography, Link } from '@mui/material';
 import api from '../api/api.js';
 
@@ -32,6 +33,7 @@ export default function SignUp() {
 
   return (
     <React.Fragment>
+      <Header />
       <Container component="main" maxWidth="xs">
         <Box
           sx={{

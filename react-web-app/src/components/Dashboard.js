@@ -1,14 +1,13 @@
 import * as React from "react";
-import '../styles/home.css'
-// import Onboarding from './Onboarding.js'
-import Dashboard from './Dashboard.js'
+// import '../styles/home.css'
+import DashboardNavigation from './DashboardNavigation.js'
 import { Container } from '@mui/material';
 
-export default function Home() {
+export default function Dashboard() {
   return (
     <React.Fragment>
       <Container component="main">
-        <Dashboard />
+        <DashboardNavigation />
       </Container>
     </React.Fragment>
   );
