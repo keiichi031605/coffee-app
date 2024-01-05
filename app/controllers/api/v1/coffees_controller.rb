@@ -1,4 +1,4 @@
-class CoffeesController < ApplicationController
+class Api::V1::CoffeesController < ApplicationController
   before_action :set_coffee, only: %i[ show update destroy ]
 
   # GET /coffees
@@ -39,13 +39,13 @@ class CoffeesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_coffee
-      @coffee = Coffee.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_coffee
+    @coffee = Coffee.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def coffee_params
-      params.fetch(:coffee, {})
-    end
+  # Only allow a list of trusted parameters through.
+  def coffee_params
+    params.fetch(:coffee, {})
+  end
 end
