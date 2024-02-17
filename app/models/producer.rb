@@ -11,5 +11,5 @@
 #  user_id    :bigint
 #
 class Producer < ApplicationRecord
-  has_many :coffees
+  # has_many :coffees
 end

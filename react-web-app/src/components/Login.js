@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import Header from './Header.js';
 import { AppBar, Box, TextField, Button, Container, Typography, Link } from '@mui/material';
 import api from '../api/api.js';
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -22,9 +24,16 @@ export default function Login() {
 
       if (response?.data?.status?.code === 200) {
         console.log(response.data.status.message)
+        // set jwt token in local storage
+        const { headers } = response;
+        localStorage.setItem('jwt', headers['authorization']);
+
         // Store the user data or JWT token as needed.
         // Navigate or do some action after successful login.
-        await api.get('/api/v1/coffees');
+        const coffeesResponse = await api.get('/api/v1/coffees');
+        // if (coffeesResponse.data.status)
+        console.log(coffeesResponse.data.status)
+        navigate('/')
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
