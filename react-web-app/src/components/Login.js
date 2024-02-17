@@ -3,14 +3,15 @@ import Header from './Header.js';
 import { AppBar, Box, TextField, Button, Container, Typography, Link } from '@mui/material';
 import api from '../api/api.js';
 import { useNavigate } from "react-router-dom";
+import { useAuth } from '../context/AuthContext';
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  // HTTP POST request to rails API for login
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -24,14 +25,12 @@ export default function Login() {
 
       if (response?.data?.status?.code === 200) {
         console.log(response.data.status.message)
-        // set jwt token in local storage
+        // login action, setting jwt token in local storage
         const { headers } = response;
-        localStorage.setItem('jwt', headers['authorization']);
+        login(headers['authorization'])
 
-        // Store the user data or JWT token as needed.
-        // Navigate or do some action after successful login.
+        // navigate to home
         const coffeesResponse = await api.get('/api/v1/coffees');
-        // if (coffeesResponse.data.status)
         console.log(coffeesResponse.data.status)
         navigate('/')
       }
