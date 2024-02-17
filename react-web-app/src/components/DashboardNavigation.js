@@ -22,6 +22,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { useNavigate } from "react-router-dom";
+import { useAuth } from '../context/AuthContext';
 
 const drawerWidth = 240;
 
@@ -96,6 +97,7 @@ export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const { logout } = useAuth();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -115,7 +117,7 @@ export default function MiniDrawer() {
 
   const handleLogout = () => {
     setAnchorEl(null);
-    localStorage.removeItem('jwt');
+    logout();
     navigate('/')
   }
 
