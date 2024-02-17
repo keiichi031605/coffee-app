@@ -13,6 +13,6 @@
 #  producer_id :bigint
 #
 class Coffee < ApplicationRecord
-  belongs_to :producer
-  has_many :roastings
+  # belongs_to :producer
+  # has_many :roastings
 end
