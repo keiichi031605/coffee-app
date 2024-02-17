@@ -28,10 +28,8 @@ export default function Login() {
         const { headers } = response;
         localStorage.setItem('jwt', headers['authorization']);
 
-        // Store the user data or JWT token as needed.
-        // Navigate or do some action after successful login.
+        // navigate to home
         const coffeesResponse = await api.get('/api/v1/coffees');
-        // if (coffeesResponse.data.status)
         console.log(coffeesResponse.data.status)
         navigate('/')
       }
