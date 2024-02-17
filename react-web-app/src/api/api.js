@@ -7,7 +7,7 @@ const instance = axios.create({
   }
 });
 
-// authentication with jwt token
+// to pass authorization jwt token to the request header
 instance.interceptors.request.use((config) => {
   const token = localStorage.getItem('jwt');
   if (token) {

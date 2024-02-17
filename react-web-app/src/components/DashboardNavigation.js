@@ -23,6 +23,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../context/AuthContext';
+import api from '../api/api.js';
 
 const drawerWidth = 240;
 
@@ -115,10 +116,18 @@ export default function MiniDrawer() {
     setAnchorEl(null);
   };
 
-  const handleLogout = () => {
+  const handleLogout = async (e) => {
+    e.preventDefault();
+
     setAnchorEl(null);
-    logout();
-    navigate('/')
+    const response = await api.delete('/logout');
+    if (response.status === 200) {
+      logout();
+      navigate('/')
+    } else {
+      // TODO: think about error handling here
+      console.log('cannot logout')
+    }
   }
 
   return (
