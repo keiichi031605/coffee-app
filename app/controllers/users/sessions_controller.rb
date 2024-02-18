@@ -15,9 +15,10 @@ class Users::SessionsController < Devise::SessionsController
   def respond_to_on_destroy
     return unless request.headers['Authorization'].present?
 
+    # TODO: Is this a right approach?
     begin
       jwt_payload = JWT.decode(request.headers['Authorization'].split(' ').last, Rails.application.credentials.devise_jwt_secret_key!).first
-      current_user = User.find(jwt_payload['sub'])
+      current_user = User.find_by(id: jwt_payload['sub'])
       if current_user
         render json: {
           status: 200,

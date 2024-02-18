@@ -1,4 +1,4 @@
-class RoastingsController < ApplicationController
+class Api::V1::RoastingsController < ApplicationController
   before_action :set_roasting, only: %i[ show update destroy ]
 
   # GET /roastings

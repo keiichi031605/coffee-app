@@ -1,4 +1,4 @@
-class ProducersController < ApplicationController
+class Api::V1::ProducersController < ApplicationController
   before_action :set_producer, only: %i[ show update destroy ]
 
   # GET /producers

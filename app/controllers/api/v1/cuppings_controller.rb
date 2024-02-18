@@ -1,4 +1,4 @@
-class CuppingsController < ApplicationController
+class Api::V1::CuppingsController < ApplicationController
   before_action :set_cupping, only: %i[ show update destroy ]
 
   # GET /cuppings
