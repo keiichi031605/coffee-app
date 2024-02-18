@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_18_053755) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_18_060706) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_18_053755) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.bigint "origin_id"
+    t.index ["origin_id"], name: "index_coffees_on_origin_id"
     t.index ["user_id"], name: "index_coffees_on_user_id"
   end
 
@@ -53,6 +55,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_18_053755) do
     t.index ["roasting_id"], name: "index_cuppings_on_roasting_id"
   end
 
+  create_table "origins", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "country", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "producers", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -82,6 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_18_053755) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "coffees", "origins"
   add_foreign_key "coffees", "users"
   add_foreign_key "cuppings", "roastings"
   add_foreign_key "roastings", "coffees"
