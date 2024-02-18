@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import '../styles/home.css'
 import Onboarding from './Onboarding.js'
 import Dashboard from './Dashboard.js'

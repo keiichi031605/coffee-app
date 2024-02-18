@@ -31,9 +31,10 @@ export default function Login() {
 
         // navigate to home
         const coffeesResponse = await api.get('/api/v1/coffees');
-        console.log(coffeesResponse.data.status)
+        console.log(coffeesResponse.data.coffees)
         navigate('/')
-      }
+        // navigate('/', { state: { coffees: coffeesResponse.data.coffees } });
+        }
     } catch (error) {
       if (error.response && error.response.status === 401) {
         setError('Invalid email or password. Please try again.');
