@@ -16,7 +16,7 @@ export default function Onboarding() {
         <Typography className="home-text" variant="h5" component="h5" sx={{ color: 'gray' }}>
           Get the easy-cupping tool with manageable your roasting profile and cupping result to efficiently improve your daily workflow.
         </Typography>
-        <Link to="/signup">
+        <Link to="/sign-up">
           <Button className="get-started-button" size="large" variant="contained" color="primary">
             Get Started
           </Button>

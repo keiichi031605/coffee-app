@@ -1,8 +1,10 @@
 class Users::SessionsController < Devise::SessionsController
   include RackSessionsFix
   respond_to :json
+  skip_before_action :authenticate_current_user
 
   private
+
   def respond_with(current_user, _opts = {})
     render json: {
       status: { 
