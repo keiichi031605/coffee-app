@@ -14,5 +14,5 @@
 #
 class Coffee < ApplicationRecord
   belongs_to :user
-  # has_many :roastings
+  has_many :roastings
 end

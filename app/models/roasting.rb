@@ -9,6 +9,6 @@
 #  updated_at :datetime         not null
 #
 class Roasting < ApplicationRecord
-  # belongs_to :coffee
-  # has_many :cuppings
+  belongs_to :coffee
+  has_many :cuppings
 end

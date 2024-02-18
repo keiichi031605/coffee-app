@@ -29,4 +29,5 @@
 #  roasting_id                 :bigint
 #
 class Cupping < ApplicationRecord
+  belongs_to :roasting
 end
