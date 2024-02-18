@@ -10,9 +10,9 @@
 #  roasted_for :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  producer_id :bigint
+#  user_id     :bigint
 #
 class Coffee < ApplicationRecord
-  # belongs_to :producer
+  belongs_to :user
   # has_many :roastings
 end
