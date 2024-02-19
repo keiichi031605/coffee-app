@@ -24,13 +24,22 @@ const rows = [
 export default function DataTable({ type }) {
   const { logout } = useAuth();
   const [data, setData] = useState({});
+  const [headers, setHeaders] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       const response = await api.get('/api/v1/coffees');
-      console.log()
       if (response.data.status.code === 200) {
-        setData(response.data.coffees)
+        const coffees = response.data.coffees
+        setData(coffees)
+
+        console.log(coffees)
+        if (coffees.length > 0) {
+          console.log(Object.keys(coffees[0]))
+          setHeaders(Object.keys(coffees[0]))
+        }
+
+        // check session expired
         if (response.data.status.message === 'session expired') {
           logout()
         }
@@ -39,16 +48,21 @@ export default function DataTable({ type }) {
     fetchData()
   }, []);
 
+  const getHeaders = () => {
+    if (data.length > 0) {
+      console.log(data)
+      // setHeaders()
+    }
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            {headers.map((item, index) => (
+              <TableCell key={index}>{ item }</TableCell>
+            ))}
           </TableRow>
         </TableHead>
         <TableBody>
