@@ -3,17 +3,16 @@ class Api::V1::CoffeesController < ApplicationController
 
   # GET /coffees
   def index
-    @coffees = @current_user.coffees
+    if @current_user
+      @coffees = @current_user.coffees
 
-    puts '########' * 100
-    puts request.headers['Authorization']
-    puts @coffees
-    puts '########' * 100
-    # render json: @coffees
-    render json: {
-      status: {code: 200, message: 'list of coffees'},
-      coffees: @coffees
-    }
+      render json: {
+        status: { code: 200, message: 'coffee list is successfully extracted' },
+        coffees: @coffees
+      }
+    else
+      render json: { status: { code: 200, message: 'session expired' } }
+    end
   end
 
   # GET /coffees/1

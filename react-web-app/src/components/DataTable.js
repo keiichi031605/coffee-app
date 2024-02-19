@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import api from '../api/api.js';
+import { useAuth } from '../context/AuthContext';
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -21,13 +22,19 @@ const rows = [
 ];
 
 export default function DataTable({ type }) {
+  const { logout } = useAuth();
   const [data, setData] = useState({});
 
   useEffect(() => {
     async function fetchData() {
-      const coffeesResponse = await api.get('/api/v1/coffees');
-      setData(coffeesResponse.data.coffees)
-      // console.log(coffeesResponse.data.coffees);
+      const response = await api.get('/api/v1/coffees');
+      console.log()
+      if (response.data.status.code === 200) {
+        setData(response.data.coffees)
+        if (response.data.status.message === 'session expired') {
+          logout()
+        }
+      }
     }
     fetchData()
   }, []);
