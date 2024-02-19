@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
   before_action :configure_permitted_parameters, if: :devise_controller?
   protected
-  before_action :authenticate_current_user
+  before_action :authorize_current_user
   attr_reader :current_user
 
   def configure_permitted_parameters
@@ -11,7 +11,8 @@ class ApplicationController < ActionController::API
 
   private
 
-  def authenticate_current_user
+  # TODO: should use pundit for authorization
+  def authorize_current_user
     header = request.headers['Authorization']
     header = header.split(' ').last if header
     begin
