@@ -3,16 +3,16 @@ class Api::V1::CoffeesController < ApplicationController
 
   # GET /coffees
   def index
+    # TODO: may need to use pundit authorization
     if @current_user
-      # TODO: Avoid passing unnecessary data such as created_at, updated_at, account_id etc
-      @coffees = @current_user.coffees
+      @coffees = @current_user.coffees.as_json(except: [:user_id, :origin_id, :created_at, :updated_at])
 
       render json: {
         status: { code: 200, message: 'coffee list is successfully extracted' },
         coffees: @coffees
       }
     else
-      render json: { status: { code: 200, message: 'session expired' } }
+      render json: { status: { code: 401, message: 'session expired' } }
     end
   end
 
