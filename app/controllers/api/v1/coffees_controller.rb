@@ -9,7 +9,7 @@ class Api::V1::CoffeesController < ApplicationController
 
       render json: {
         status: { code: 200, message: 'coffee list is successfully extracted' },
-        coffees: @coffees
+        metadata: @coffees
       }
     else
       render json: { status: { code: 401, message: 'session expired' } }

@@ -16,9 +16,17 @@ export default function DataTable({ type }) {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await api.get('/api/v1/coffees');
+      let response
+      switch (type) {
+        case 'coffees':
+          response = await api.get('/api/v1/coffees');
+          break;
+        default:
+          // response = await api.get('/api/v1/coffees');
+      }
+
       if (response.data.status.code === 200) {
-        const data = response.data.coffees
+        const data = response.data.metadata
         setData(data)
         if (data.length > 0) {
           setHeaders(Object.keys(data[0]))
@@ -37,7 +45,11 @@ export default function DataTable({ type }) {
         <TableHead>
           <TableRow>
             {headers.map((item, index) => (
-              <TableCell key={index}>{ item }</TableCell>
+              index === 0 ?
+                <TableCell key={index}>{ item.toUpperCase() }</TableCell>
+              :
+                <TableCell align="right" key={index}>{ item.toUpperCase() }</TableCell>
+              
             ))}
           </TableRow>
         </TableHead>
