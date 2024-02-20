@@ -11,10 +11,10 @@ export default function Onboarding() {
       <Header />
       <Box className="home-wrapper">
         <Typography className="home-text" variant="h3" component="h3" sx={{ color: 'white' }}>
-          Coffee Improve Easy
+          Lorem Ipsum
         </Typography>
         <Typography className="home-text" variant="h5" component="h5" sx={{ color: 'gray' }}>
-          Get the easy-cupping tool with manageable your roasting profile and cupping result to efficiently improve your daily workflow.
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
         </Typography>
         <Link to="/sign-up">
           <Button className="get-started-button" size="large" variant="contained" color="primary">
