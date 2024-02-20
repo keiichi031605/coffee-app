@@ -23,7 +23,7 @@ const rows = [
 
 export default function DataTable({ type }) {
   const { logout } = useAuth();
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
   const [headers, setHeaders] = useState([]);
 
   useEffect(() => {
@@ -48,13 +48,6 @@ export default function DataTable({ type }) {
     fetchData()
   }, []);
 
-  const getHeaders = () => {
-    if (data.length > 0) {
-      console.log(data)
-      // setHeaders()
-    }
-  };
-
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -66,18 +59,18 @@ export default function DataTable({ type }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {data.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.id}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.name}</TableCell>
+              <TableCell align="right">{row.price}</TableCell>
+              <TableCell align="right">{row.prcess}</TableCell>
+              <TableCell align="right">{row.variety}</TableCell>
             </TableRow>
           ))}
         </TableBody>

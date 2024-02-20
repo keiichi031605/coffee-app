@@ -4,6 +4,7 @@ class Api::V1::CoffeesController < ApplicationController
   # GET /coffees
   def index
     if @current_user
+      # TODO: Avoid passing unnecessary data such as created_at, updated_at, account_id etc
       @coffees = @current_user.coffees
 
       render json: {
