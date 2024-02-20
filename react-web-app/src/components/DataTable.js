@@ -59,6 +59,7 @@ export default function DataTable({ type }) {
               key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
+              {/* TODO: Need to do this more dinamically */}
               <TableCell component="th" scope="row">
                 {row.id}
               </TableCell>
@@ -66,6 +67,8 @@ export default function DataTable({ type }) {
               <TableCell align="right">{row.price}</TableCell>
               <TableCell align="right">{row.prcess}</TableCell>
               <TableCell align="right">{row.variety}</TableCell>
+              <TableCell align="right">{row.origin}</TableCell>
+              <TableCell align="right">{row.country}</TableCell>
             </TableRow>
           ))}
         </TableBody>

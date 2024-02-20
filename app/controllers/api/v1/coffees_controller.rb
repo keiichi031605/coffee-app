@@ -5,11 +5,19 @@ class Api::V1::CoffeesController < ApplicationController
   def index
     # TODO: may need to use pundit authorization
     if @current_user
-      @coffees = @current_user.coffees.as_json(except: [:user_id, :origin_id, :created_at, :updated_at])
+      coffees = @current_user.coffees.includes(:origin).map do |coffee|
+        coffee_attributes = coffee.as_json(except: [:user_id, :origin_id, :created_at, :updated_at])
+        origin_attributes = coffee.origin.as_json(only: [:name, :country])
+      
+        coffee_attributes.merge(
+          'origin' => origin_attributes['name'],
+          'country' => origin_attributes['country'].capitalize
+        )
+      end
 
       render json: {
         status: { code: 200, message: 'coffee list is successfully extracted' },
-        metadata: @coffees
+        metadata: coffees
       }
     else
       render json: { status: { code: 401, message: 'session expired' } }
