@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Typography from '@mui/material/Typography';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import { Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import api from '../api/api.js';
 import { useAuth } from '../context/AuthContext';
 
@@ -46,6 +39,9 @@ export default function DataTable({ type }) {
       <Typography variant="h6" noWrap component="div">
         Coffee
       </Typography>
+      <Button className="new-button" variant="contained" color="primary">
+        New
+      </Button>
 
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
