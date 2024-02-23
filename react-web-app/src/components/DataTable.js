@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Typography from '@mui/material/Typography';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -41,6 +42,11 @@ export default function DataTable({ type }) {
 
   return (
     <TableContainer component={Paper}>
+      {/* TODO: should be dynamic */}
+      <Typography variant="h6" noWrap component="div">
+        Coffee
+      </Typography>
+
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
