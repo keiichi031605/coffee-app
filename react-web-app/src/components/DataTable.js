@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import api from '../api/api.js';
+import { useNavigate } from "react-router-dom";
 import { useAuth } from '../context/AuthContext';
 
-export default function DataTable({ type }) {
+export default function DataTable({ type, onNewAction }) {
+  const navigate = useNavigate();
   const { logout } = useAuth();
   const [data, setData] = useState([]);
   const [headers, setHeaders] = useState([]);
@@ -33,13 +35,20 @@ export default function DataTable({ type }) {
     fetchData()
   }, []);
 
+  const handleNewAction = () => {
+    console.log('new')
+    api.get('/api/v1/coffees');
+    // navigate('/coffees/new')
+    onNewAction();
+  }
+
   return (
     <TableContainer component={Paper}>
       {/* TODO: should be dynamic */}
       <Typography variant="h6" noWrap component="div">
         Coffee
       </Typography>
-      <Button className="new-button" variant="contained" color="primary">
+      <Button onClick={handleNewAction} className="new-button" variant="contained" color="primary">
         New
       </Button>
 

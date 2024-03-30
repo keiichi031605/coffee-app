@@ -24,6 +24,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from '../context/AuthContext';
 import api from '../api/api.js';
 import DataTable from './DataTable';
+import NewCoffee from '../components/coffees/New.js';
 
 const drawerWidth = 240;
 
@@ -99,6 +100,8 @@ export default function MiniDrawer() {
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const { logout } = useAuth();
+  // view state
+  const [isTable, setIsTable] = useState(true);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -129,6 +132,14 @@ export default function MiniDrawer() {
       console.log('cannot logout')
     }
   }
+
+  const handleIsTableTrue = () => {
+    setIsTable(true);
+  };
+
+  const handleIsTableFalse = () => {
+    setIsTable(false);
+  };
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -243,9 +254,11 @@ export default function MiniDrawer() {
           ))}
         </List>
       </Drawer>
+
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <DataTable type="coffees" />
+        {/* TODO: Make them below dynamic */}
+        {isTable ? <DataTable type="coffees" onNewAction={handleIsTableFalse} /> : <NewCoffee />}
       </Box>
     </Box>
   );
