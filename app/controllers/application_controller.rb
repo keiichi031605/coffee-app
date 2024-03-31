@@ -20,7 +20,7 @@ class ApplicationController < ActionController::API
       @current_user = User.find(jwt_payload['sub'])
     rescue JWT::DecodeError, ActiveRecord::RecordNotFound
       # TODO: think about the best practice for authentication
-      # render json: { errors: ['Not Authenticated'] }, status: :unauthorized
+      render json: { errors: ['Not Authenticated'] }, status: :unauthorized
     end
   end
 end

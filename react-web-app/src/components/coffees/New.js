@@ -1,144 +1,125 @@
 import React, { useState } from 'react';
-import { AppBar, Box, TextField, Button, Container, Typography, Link } from '@mui/material';
+import { Box, TextField, Button, Container, Typography } from '@mui/material';
 import api from '../../api/api.js';
 import { useNavigate } from "react-router-dom";
-import { useAuth } from '../../context/AuthContext';
 
-export default function Login() {
+export default function NewCoffee() {
   const navigate = useNavigate();
-  const { login } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [variety, setVariety] = useState('');
+  const [price, setPrice] = useState('');
+  const [process, setProcess] = useState('');
+
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     try {
-      const response = await api.post('/login', {
-        user: {
-          email: email,
-          password: password
+      const response = await api.post('/api/v1/coffees', {
+        coffee: {
+          name: name
         }
       });
-
       if (response?.data?.status?.code === 200) {
-        console.log(response.data.status.message)
-        // login action, setting jwt token in local storage
-        const { headers } = response;
-        login(headers['authorization'])
-
-        // navigate to home
-        const coffeesResponse = await api.get('/api/v1/coffees');
-        console.log(coffeesResponse.data.coffees)
-        navigate('/')
-        // navigate('/', { state: { coffees: coffeesResponse.data.coffees } });
-        }
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        setError('Invalid email or password. Please try again.');
-      } else {
-        setError('Something went wrong. Please try again later.');
+        navigate('/coffees');
       }
-      console.error("Error logging in:", error.response || error);    
+
+    } catch (error) {
+      // if (error.response && error.response.status === 401) {
+      //   setError('Invalid email or password. Please try again.');
+      // } else {
+      //   setError('Something went wrong. Please try again later.');
+      // }
+      console.error("Error with:", error.response || error);    
     }
   };
 
   return (
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="md">
         <Box
+          component="form"
+          onSubmit={handleSubmit}    
           sx={{
-            minHeight: '100vh',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
+            width: '100%',
+            mt: 1,
+            p: 3,
+            backgroundColor: 'white',
+            borderRadius: 2,
+            boxShadow: 1
           }}
         >
-          <AppBar position="relative" color="transparent" elevation={0}>
-            <Typography
-              variant="h4"
-              align="center"
-              sx={{ 
-                color: 'white', 
-                fontWeight: 700
-              }}
-              mb={5}
-            >
-              Welcome back!<br />We exist to make entrepreneurship easier.
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="name"
+            label="Name"
+            name="name"
+            autoComplete="name"
+            autoFocus
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            id="variety"
+            label="Variety"
+            name="variety"
+            autoComplete="variety"
+            autoFocus
+            value={variety}
+            onChange={(e) => setVariety(e.target.value)}
+          />
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row'
+            }}
+          >
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              name="process"
+              label="process"
+              type="process"
+              id="process"
+              autoComplete="process"
+              value={process}
+              onChange={(e) => setProcess(e.target.value)}   
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              name="price"
+              label="price"
+              type="price"
+              id="price"
+              autoComplete="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}   
+            />
+          </Box>
+          {error && (
+            <Typography color="error" align="center">
+              {error}
             </Typography>
-          </AppBar>
-          <Box 
-            component="form"
-            onSubmit={handleSubmit}    
-            sx={{
-              width: '100%',
-              mt: 1,
-              p: 3,
-              backgroundColor: 'white',
-              borderRadius: 2,
-              boxShadow: 1
-            }}
+          )}
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            sx={{ mt: 3, mb: 2 }}
+            size="large"
           >
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}   
-            />
-            {error && (
-              <Typography color="error" align="center">
-                {error}
-              </Typography>
-            )}
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              sx={{ mt: 3, mb: 2 }}
-              size="large"
-            >
-              Sign In
-            </Button>
-            <Box sx={{ mt: 2, textAlign: 'center' }}>
-              <Link variant="body2" href="#">
-                Forgot password?
-              </Link>
-            </Box>
-          </Box>
-          <Box 
-            sx={{
-              mt: 5, 
-              display: 'flex', 
-              justifyContent: 'center', 
-              gap: 2, 
-              color: 'white'
-            }}
-          >
-            <Link href="#">Terms</Link>
-            <Link href="#">Privacy</Link>
-          </Box>
+            Create
+          </Button>
         </Box>
       </Container>
   );

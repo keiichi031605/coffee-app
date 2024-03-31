@@ -4,7 +4,7 @@ import api from '../api/api.js';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../context/AuthContext';
 
-export default function DataTable({ type, onNewAction }) {
+export default function DataTable({ type }) {
   const navigate = useNavigate();
   const { logout } = useAuth();
   const [data, setData] = useState([]);
@@ -38,8 +38,7 @@ export default function DataTable({ type, onNewAction }) {
   const handleNewAction = () => {
     console.log('new')
     api.get('/api/v1/coffees');
-    // navigate('/coffees/new')
-    onNewAction();
+    navigate('/coffees/new')
   }
 
   return (

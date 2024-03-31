@@ -20,7 +20,7 @@ import FreeBreakfastIcon from '@mui/icons-material/FreeBreakfast';
 import MicrowaveIcon from '@mui/icons-material/Microwave';import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import { useAuth } from '../context/AuthContext';
 import api from '../api/api.js';
 import DataTable from './DataTable';
@@ -94,7 +94,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function MiniDrawer() {
+export default function DashboardNavigation() {
   const navigate = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -258,7 +258,8 @@ export default function MiniDrawer() {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         {/* TODO: Make them below dynamic */}
-        {isTable ? <DataTable type="coffees" onNewAction={handleIsTableFalse} /> : <NewCoffee />}
+        {/* {isTable ? <DataTable type="coffees" onNewAction={handleIsTableFalse} /> : <NewCoffee />} */}
+        <Outlet />
       </Box>
     </Box>
   );

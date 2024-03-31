@@ -14,6 +14,6 @@
 #
 class Coffee < ApplicationRecord
   belongs_to :user
-  belongs_to :origin
+  belongs_to :origin, optional: true
   has_many :roastings
 end

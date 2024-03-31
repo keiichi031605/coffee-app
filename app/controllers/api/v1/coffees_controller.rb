@@ -31,10 +31,11 @@ class Api::V1::CoffeesController < ApplicationController
 
   # POST /coffees
   def create
-    @coffee = Coffee.new(coffee_params)
-
+    @coffee = @current_user.coffees.new(coffee_params)
     if @coffee.save
-      render json: @coffee, status: :created, location: @coffee
+      render json: {
+        status: { code: 200, message: 'coffee is successfully created' }
+      }
     else
       render json: @coffee.errors, status: :unprocessable_entity
     end
@@ -62,6 +63,7 @@ class Api::V1::CoffeesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def coffee_params
-    params.fetch(:coffee, {})
+    # params.fetch(:coffee, {})
+    params.require(:coffee).permit(:name)
   end
 end

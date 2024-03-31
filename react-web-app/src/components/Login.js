@@ -24,16 +24,13 @@ export default function Login() {
       });
 
       if (response?.data?.status?.code === 200) {
-        console.log(response.data.status.message)
         // login action, setting jwt token in local storage
         const { headers } = response;
         login(headers['authorization'])
 
         // navigate to home
-        const coffeesResponse = await api.get('/api/v1/coffees');
-        console.log(coffeesResponse.data.coffees)
-        navigate('/')
-        // navigate('/', { state: { coffees: coffeesResponse.data.coffees } });
+        await api.get('/api/v1/coffees');
+        navigate('/coffees')
         }
     } catch (error) {
       if (error.response && error.response.status === 401) {
